@@ -6,6 +6,8 @@ import time
 import bs4
 import re
 
+# 使用 requests + bs4 + csv 爬取 gradcafe 数据
+
 # 请求头
 header = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) \
                         AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36'}

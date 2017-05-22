@@ -22,14 +22,6 @@ NEWSPIDER_MODULE = 'gradcafe.spiders'
 ROBOTSTXT_OBEY = True
 
 
-ITEM_PIPELINES = {
-   'gradcafe.pipelines.GradcafePipeline': 300,
-}
-
-MONGODB_SERVER = "localhost"
-MONGODB_PORT = 27017
-MONGODB_DB = "gradcafe"
-MONGODB_COLLECTION = "info"
 
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
@@ -75,9 +67,15 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'gradcafe.pipelines.GradcafePipeline': 300,
-#}
+
+ITEM_PIPELINES = {
+   'gradcafe.pipelines.GradcafePipeline': 300,
+}
+
+MONGODB_SERVER = "localhost"
+MONGODB_PORT = 27017
+MONGODB_DB = "gradcafe"
+MONGODB_COLLECTION = "info"
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html

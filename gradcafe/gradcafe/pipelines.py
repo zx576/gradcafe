@@ -9,7 +9,9 @@ from scrapy.conf import settings
 
 
 class GradcafePipeline(object):
+
     def __init__(self):
+
         connection = pymongo.MongoClient(
             settings['MONGODB_SERVER'],
             settings['MONGODB_PORT']
@@ -18,7 +20,5 @@ class GradcafePipeline(object):
         self.collection = db[settings['MONGODB_COLLECTION']]
 
     def process_item(self, item, spider):
-
         self.collection.insert(dict(item))
-
         return item

@@ -13,10 +13,10 @@ class GradcafeItem(scrapy.Item):
     # name = scrapy.Field()
     # pass
     institution = scrapy.Field()
+    date_added = scrapy.Field()
+    notes = scrapy.Field()
+    page_count = scrapy.Field()
     program = scrapy.Field()
     decision = scrapy.Field()
     date = scrapy.Field()
     st = scrapy.Field()
-    date_added = scrapy.Field()
-    notes = scrapy.Field()
-    page_count = scrapy.Field()
