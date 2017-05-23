@@ -17,7 +17,7 @@ TOTALPAGE = 10
 GET_PAGE = True
 
 
-def fetch(url):
+def fetch(url,word):
     global TOTALPAGE
     global GET_PAGE
     '''爬取某一页面的信息'''
@@ -71,16 +71,16 @@ def fetch(url):
         GET_PAGE = False
 
     # 保存信息
-    save(data)
+    save(data,word)
 
 
 # 保存信息
 write_head=True
-def save(info):
+def save(info,word):
     # 使用一个全局变量判断是否添加标题行，第一次执行会写入标题行
     global write_head
     # newline 参数去除 csv 空行
-    with open('data.csv','a+',encoding='utf-8',newline='')as f:
+    with open('keyword-{}.csv'.format(word),'a+',encoding='utf-8',newline='')as f:
         writer = csv.writer(f)
         if write_head:
             # 首次执行添加标题行
@@ -90,17 +90,18 @@ def save(info):
             writer.writerow(i)
 
 
-def main():
+def config(keyword):
     # global TOTALPAGE
     # 过去一个月、每页 250 条信息 链接
-    url = 'http://thegradcafe.com/survey/index.php?t=m&pp=250&o=&p='
+    # url = 'http://thegradcafe.com/survey/index.php?t=m&pp=250&o=&p='
+    url = 'http://thegradcafe.com/survey/index.php?q={0}&t=a&pp=250&o=&p='.format(keyword)
     count = 1
     # 直到总页面，抓取停止
     while count <= TOTALPAGE:
 
         the_url = url + str(count)
         print('正在获取第{0}页信息，url为{1}'.format(count,the_url))
-        threading.Thread(target=fetch,args=(the_url,)).start()
+        threading.Thread(target=fetch,args=(the_url,keyword)).start()
         # 仅开 3 个线程
         while threading.active_count() > 3 :
             time.sleep(3)
@@ -108,6 +109,17 @@ def main():
         # 防止请求过快
         time.sleep(1)
         count += 1
+
+
+
+search_list = ['TUM','Marywood']
+def main():
+    for word in search_list:
+        print('正在处理关键字:',word)
+        config(word)
+        time.sleep(3)
+        print('关键字: {} 处理完毕\n'.format(word))
+
 
 if __name__ == '__main__':
     main()
